@@ -13,6 +13,7 @@ This project implements a **batch analytics pipeline** on the **MIMIC-III** clin
 | **MapReduce**   | Batch processing for calculating metrics like average age      |
 | **Hive**        | SQL-like querying interface for structured healthcare records  |
 | **Docker**      | Containerized environment for running Hadoop and Hive services |
+| **Python**      | Pandas for cleaning data and Pyarrow for converting files to Parquet |
 
 ---
 
@@ -64,13 +65,15 @@ This project implements a **batch analytics pipeline** on the **MIMIC-III** clin
 
 ```
 Healthcare-Data-Analytics-Pipeline/
-├── Cleaning scripts/
-├── Converting to parquet scripts/
-├── Dataset/
-├── MapReduce/
+├── Cleaning scripts/                # Scripts used for data cleaning
+├── Converting to parquet scripts/  # Scripts to convert CSV files to Parquet format
+├── Dataset/                        # Raw and cleaned datasets
+├── MapReduce/                      # Java code for processing data using MapReduce
 │   └── AverageAge.java
-├── Hive Queries/
-├── README.md
+├── Hive Queries/                   # HiveQL scripts for querying the data
+├── UserManual.pdf                  # Guide for how to run and understand the project
+├── README.md                       # Project documentation
+
 ```
 
 ---
