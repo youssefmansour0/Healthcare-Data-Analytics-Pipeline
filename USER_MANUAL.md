@@ -9,6 +9,7 @@ This manual documents all the detailed steps carried out in the project, includi
 
 To implement a Big Data batch analytics pipeline for healthcare data using the MIMIC-III dataset. The pipeline enables:
 
+- Python for cleaning data and converting files to parquet
 - HDFS for distributed storage
 - Hive for SQL-like batch queries
 - MapReduce for average age calculation
@@ -24,8 +25,8 @@ To implement a Big Data batch analytics pipeline for healthcare data using the M
 | Hadoop HDFS   | Store large structured files                 |
 | Hive          | SQL engine for querying big data             |
 | MapReduce     | Custom job to calculate average patient age  |
-| PyArrow       | Used for converting cleaned data to Parquet  |
-| Pandas        | For cleaning and preparing the dataset       |
+| Python (PyArrow)       | Used for converting cleaned data to Parquet  |
+| Python (Pandas)        | For cleaning and preparing the dataset       |
 
 ---
 
@@ -205,6 +206,6 @@ Average Age    70
 
 ##  Author
 
-**Youssef Mansour**  
+**Youssef Mohamed Abdo Mansour**  
 Data Engineering Trainee – ITI Intensive Code Camp
 youssef.abdo2910@gmail.com
