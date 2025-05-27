@@ -1,0 +1,114 @@
+1. Average Length of Stay per Diagnosis (ICD9 Code):
+
+hive> SELECT
+    >   d.icd9_code,
+    >   COUNT(*) AS num_cases,
+    >   ROUND(AVG(UNIX_TIMESTAMP(a.dischtime) - UNIX_TIMESTAMP(a.admittime)) / 86400, 2) AS avg_los_days
+    > FROM
+    >   admissions a
+    > JOIN
+    >   diagnoses_icd d
+    > ON
+    >   a.hadm_id = d.hadm_id
+    > WHERE
+    >   a.admittime IS NOT NULL AND a.dischtime IS NOT NULL
+    > GROUP BY
+    >   d.icd9_code
+    > ORDER BY
+    >   avg_los_days DESC
+    > LIMIT 20;
+
+27542   1       123.98
+3510    1       123.98
+28803   1       123.98
+37000   1       123.98
+52801   1       123.98
+45341   1       123.98
+45381   1       123.98
+4830    1       123.98
+60490   1       123.98
+V600    1       123.98
+71589   1       123.98
+35782   1       123.98
+6039    1       123.98
+28489   1       123.98
+4940    1       123.98
+27788   1       123.98
+28800   1       123.98
+48242   2       66.46
+20020   2       65.5
+2530    2       65.5
+Time taken: 14.601 seconds, Fetched: 20 row(s)
+-------------------------------------------------------------------------------------------------------------------------------------
+
+2. Distribution of ICU Readmissions
+
+hive> SELECT
+    >   subject_id,
+    >   COUNT(icustay_id) AS icu_admissions
+    > FROM
+    >   icustays
+    > GROUP BY
+    >   subject_id
+    > HAVING
+    >   COUNT(icustay_id) > 1
+    > ORDER BY
+    >   icu_admissions DESC
+    > LIMIT 20;
+
+41976   15
+10124   4
+44083   3
+10088   3
+10117   2
+43881   2
+43746   2
+43735   2
+42346   2
+42281   2
+42135   2
+40124   2
+41795   2
+40304   2
+40177   2
+10119   2
+10094   2
+10059   2
+40310   2
+Time taken: 2.734 seconds, Fetched: 19 row(s)
+-----------------------------------------------------------------------------------------------------------------------------------
+
+3. Mortality Rates by Demographic Groups (Gender & Ethnicity)
+
+hive> SELECT
+    >   p.gender,
+    >   a.ethnicity,
+    >   COUNT(*) AS total_admissions,
+    >   SUM(a.hospital_expire_flag) AS num_deaths,
+    >   ROUND(SUM(a.hospital_expire_flag) * 100.0 / COUNT(*), 2) AS mortality_rate_percent
+    > FROM
+    >   admissions a
+    > JOIN
+    >   patients p
+    > ON
+    >   a.subject_id = p.subject_id
+    > GROUP BY
+    >   p.gender, a.ethnicity
+    > ORDER BY
+    >   mortality_rate_percent DESC;
+
+M       ASIAN   1       1       100.00
+M       UNABLE TO OBTAIN        1       1       100.00
+M       OTHER   1       1       100.00
+M       UNKNOWN/NOT SPECIFIED   2       1       50.00
+F       OTHER   2       1       50.00
+M       AMERICAN INDIAN/ALASKA NATIVE FEDERALLY RECOGNIZED TRIBE        2       1       50.00
+F       HISPANIC OR LATINO      2       1       50.00
+F       UNKNOWN/NOT SPECIFIED   9       4       44.44
+F       WHITE   41      14      34.15
+M       BLACK/AFRICAN AMERICAN  3       1       33.33
+M       WHITE   45      13      28.89
+F       BLACK/AFRICAN AMERICAN  4       1       25.00
+F       ASIAN   1       0       0.00
+M       HISPANIC/LATINO - PUERTO RICAN  15      0       0.00
+Time taken: 12.005 seconds, Fetched: 14 row(s)

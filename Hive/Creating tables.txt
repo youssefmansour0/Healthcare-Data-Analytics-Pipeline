@@ -1,0 +1,87 @@
+hive> CREATE EXTERNAL TABLE IF NOT EXISTS patients (
+    >     row_id BIGINT,
+    >     subject_id BIGINT,
+    >     gender STRING,
+    >     dob TIMESTAMP,
+    >     dod TIMESTAMP,
+    >     dod_hosp TIMESTAMP,
+    >     dod_ssn TIMESTAMP,
+    >     expire_flag INT
+    > )
+    > STORED AS PARQUET
+    > LOCATION '/user/mimic/cleaned_data/patients/';
+OK
+Time taken: 2.139 seconds
+--------------------------------------------------------------------------------------------------------------------------
+hive> CREATE EXTERNAL TABLE IF NOT EXISTS admissions (
+    >     row_id BIGINT,
+    >     subject_id BIGINT,
+    >     hadm_id BIGINT,
+    >     admittime TIMESTAMP,
+    >     dischtime TIMESTAMP,
+    >     deathtime TIMESTAMP,
+    >     admission_type STRING,
+    >     admission_location STRING,
+    >     discharge_location STRING,
+    >     insurance STRING,
+    >     language STRING,
+    >     religion STRING,
+    >     marital_status STRING,
+    >     ethnicity STRING,
+    >     edregtime TIMESTAMP,
+    >     edouttime TIMESTAMP,
+    >     diagnosis STRING,
+    >     hospital_expire_flag BIGINT,
+    >     has_chartevents_data BIGINT
+    > )
+    > STORED AS PARQUET
+    > LOCATION '/user/mimic/cleaned_data/admissions/';
+OK
+Time taken: 0.09 seconds
+------------------------------------------------------------------------------------------------------------------------
+hive> CREATE EXTERNAL TABLE IF NOT EXISTS icustays (
+    >     row_id BIGINT,
+    >     subject_id BIGINT,
+    >     hadm_id BIGINT,
+    >     icustay_id BIGINT,
+    >     dbsource STRING,
+    >     first_careunit STRING,
+    >     last_careunit STRING,
+    >     first_wardid BIGINT,
+    >     last_wardid BIGINT,
+    >     intime TIMESTAMP,
+    >     outtime TIMESTAMP,
+    >     los DOUBLE
+    > )
+    > STORED AS PARQUET
+    > LOCATION '/user/mimic/cleaned_data/icu/';
+OK
+Time taken: 0.065 seconds
+-----------------------------------------------------------------------------------------------------------------------
+hive> CREATE EXTERNAL TABLE IF NOT EXISTS diagnoses_icd (
+    >     row_id BIGINT,
+    >     subject_id BIGINT,
+    >     hadm_id BIGINT,
+    >     seq_num INT,
+    >     icd9_code STRING
+    > )
+    > STORED AS PARQUET
+    > LOCATION '/user/mimic/cleaned_data/diagnoses/';
+OK
+Time taken: 0.059 seconds
+------------------------------------------------------------------------------------------------------------------------
+hive> CREATE EXTERNAL TABLE IF NOT EXISTS labevents (
+    >     row_id BIGINT,
+    >     subject_id BIGINT,
+    >     hadm_id BIGINT,
+    >     itemid BIGINT,
+    >     charttime TIMESTAMP,
+    >     value STRING,
+    >     valuenum DOUBLE,
+    >     valueuom STRING,
+    >     flag STRING
+    > )
+    > STORED AS PARQUET
+    > LOCATION '/user/mimic/cleaned_data/labevents/';
+OK
+Time taken: 0.055 seconds
