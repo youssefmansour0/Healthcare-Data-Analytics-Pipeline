@@ -1,4 +1,7 @@
-#  Healthcare Data Analytics Pipeline
+#  Healthcare Big Data Analytics Pipeline
+
+##  Pipeline Architecture
+![Pipeline Architecture](pipeline_architecture.png)
 
 ##  Project Overview  
 This project implements a **batch analytics pipeline** on the **MIMIC-III** clinical dataset using Big Data tools. The goal is to extract meaningful healthcare insights through distributed processing, focusing on batch computations such as **average patient age**, **length of stay**, and **readmission statistics**.
