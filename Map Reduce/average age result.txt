@@ -1,3 +1,2 @@
-root@3831c4479aa8:/# hdfs dfs -cat /user/root/output_avg/part-r-00000
-2025-05-26 22:11:20,202 INFO sasl.SaslDataTransferClient: SASL encryption trust check: localHostTrusted = false, remoteHostTrusted = false
+# hdfs dfs -cat /user/root/output_avg/part-r-00000
 Average Age     70.6086956521739
